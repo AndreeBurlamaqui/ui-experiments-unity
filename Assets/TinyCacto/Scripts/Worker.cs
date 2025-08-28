@@ -14,7 +14,7 @@ public class Worker : MonoBehaviour
         ON_PAUSE
     }
 
-    [SerializeField] private List<ResourceAmount> backpack = new();
+    [SerializeField] private List<CollectedResource> backpack = new();
 
     [field: SerializeField] public WorkerData Data { get; private set; }
     [System.Serializable]
@@ -39,7 +39,7 @@ public class Worker : MonoBehaviour
     public void Initiate(WorkerData data)
     {
         Data = data;
-        transform.position = Nexus.Instance.transform.position;
+        transform.position = ResourceManager.Instance.transform.position;
         SetState(CollectingState.COLLECTING);
     }
 
@@ -83,7 +83,7 @@ public class Worker : MonoBehaviour
     private async void OnDelivering()
     {
         // How quickly should it go to nexus and then empty backpack
-        var movement = LMotion.Create(transform.position, Nexus.Instance.transform.position, Data.speed)
+        var movement = LMotion.Create(transform.position, ResourceManager.Instance.transform.position, Data.speed)
             .BindToPosition(transform);
         await movement;
 
@@ -108,7 +108,7 @@ public class Worker : MonoBehaviour
         await collect;
 
         // Based on efficacy, collect resource from group
-        var collected = Data.resourceData.Collect();
+        var collected = Data.resourceData.Collect(Data.capacity);
         backpack.AddRange(collected);
         SetState(CollectingState.DELIVERING);
     }

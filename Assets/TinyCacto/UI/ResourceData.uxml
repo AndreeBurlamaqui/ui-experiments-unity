@@ -1,8 +1,27 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:VisualElement name="ResourceData" style="flex-grow: 1; width: 75px; justify-content: space-around; align-self: auto; align-content: auto; align-items: center;">
-        <ui:Label text="Resource Name" name="ResourceName" style="font-size: 12px; justify-content: flex-start; -unity-text-align: middle-center; white-space: normal;" />
-        <ui:VisualElement name="ResourceIcon" style="flex-grow: 1; width: 50px; height: 50px; min-height: 50px; max-height: 50px; background-image: url(&quot;project://database/Assets/TinyCacto/UI/UnityDefaultRuntimeTheme.tss?fileID=-1304905567622442630&amp;guid=b4a73b1f1df4af64d91828d7904aa4ce&amp;type=3#arrow-down@2x&quot;); -unity-background-scale-mode: scale-to-fit;" />
-        <ui:Label text="88888" name="ResourceAmount" style="font-size: 12px; justify-content: flex-start; -unity-text-align: middle-center; white-space: normal;" />
-        <ui:Label text="88.88/s" name="ResourcePerSec" style="font-size: 10px; justify-content: flex-start; -unity-text-align: middle-center; white-space: normal; -unity-font-style: normal; text-shadow: 0 0 0 rgb(255, 255, 255); -unity-text-outline-width: 0; -unity-text-outline-color: rgb(0, 0, 0); letter-spacing: 0; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=f1d0f79018d3b29419fc8e53f4705af8&amp;type=3#NotInter-Regular&quot;);" />
+    <ui:VisualElement name="ResourceData" data-source-type="ResourceEntry, Assembly-CSharp" style="flex-grow: 1; width: 100px; justify-content: space-around; align-self: auto; align-content: auto; align-items: center;">
+        <ui:Label text="Resource Name" name="ResourceName">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="type._Title_k__BackingField" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+        <ui:VisualElement name="ResourceIcon" style="flex-grow: 1; width: 50px; height: 50px; min-height: 50px; max-height: 50px; background-image: url(&quot;project://database/Assets/TinyCacto/UI/UnityDefaultRuntimeTheme.tss?fileID=-1304905567622442630&amp;guid=b4a73b1f1df4af64d91828d7904aa4ce&amp;type=3#arrow-down@2x&quot;); -unity-background-scale-mode: scale-to-fit;">
+            <Bindings>
+                <ui:DataBinding property="style.backgroundImage" data-source-path="type._Icon_k__BackingField" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:VisualElement>
+        <ui:Label text="88888" name="ResourceAmount" style="font-size: 12px; justify-content: flex-start; -unity-text-align: middle-center; white-space: normal;">
+            <Bindings>
+                <ui:DataBinding property="text" data-source-path="currentAmount" binding-mode="ToTarget" />
+            </Bindings>
+        </ui:Label>
+        <ui:VisualElement style="flex-direction: row; align-items: stretch; justify-content: space-evenly; align-self: flex-start; align-content: auto; flex-wrap: nowrap; flex-shrink: 0; width: 100%;">
+            <ui:Label text="888888888888888888888" name="ResourcePerSec" double-click-selects-word="false" style="font-size: 10px; justify-content: flex-start; -unity-text-align: middle-center; white-space: normal; -unity-font-style: normal; text-shadow: 0 0 0 rgb(255, 255, 255); -unity-text-outline-width: 0; -unity-text-outline-color: rgb(0, 0, 0); letter-spacing: 0; -unity-font-definition: url(&quot;project://database/Assets/UI%20Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss?fileID=2230732570650464555&amp;guid=f1d0f79018d3b29419fc8e53f4705af8&amp;type=3#NotInter-Regular&quot;); align-items: auto; align-self: flex-start; align-content: auto; flex-direction: column; flex-wrap: nowrap; text-overflow: clip; width: 75%;">
+                <Bindings>
+                    <ui:DataBinding property="text" data-source-path="efficacy" binding-mode="ToTarget" />
+                </Bindings>
+            </ui:Label>
+            <ui:Label text="/s" name="per-second" style="-unity-text-align: middle-left; white-space: nowrap;" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

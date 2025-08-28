@@ -1,75 +1,117 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ResourceGroup : MonoBehaviour
 {
 
-    [SerializeField] private ResourceType[] resources;
+    [SerializeField] private ResourceEntry[] resources;
+    public IReadOnlyList<ResourceEntry> Resources => resources;
 
-    public void OnClick()
+    public void Tick()
     {
-        // Check if it's already collected
-
-        // If not, offer to buy
+        for(int r = 0; r < resources.Length; r++)
+        {
+            resources[r].Update(Time.deltaTime);
+        }
     }
 
     [ContextMenu("On click to collect")]
-    public void InitiateCollection()
+    public void OnClick()
     {
-        Nexus.Instance.RegisterAsResource(this);
+        // Check if it's already collected
+        if (ResourceManager.Instance.IsGroupOwned(this))
+        {
+            // If so, show resource UI
+            GameplayUIController.Instance.DisplayResourceUI(this);
+        }
+        else
+        {
+            // If not, offer to buy
+            ResourceManager.Instance.RegisterAsResource(this);
+        }
     }
 
-    public List<ResourceAmount> Collect()
+    /// <summary>
+    /// Collect resources from this group, limited by a worker's carry capacity.
+    /// Splits capacity across available resources in order.
+    /// </summary>
+    /// <param name="carryCapacity">How much the worker can carry in total.</param>
+    /// <returns>List of collected resources (type + amount actually taken).</returns>
+    public List<CollectedResource> Collect(double carryCapacity)
     {
-        List<ResourceAmount> collected = new();
+        var collected = new List<CollectedResource>();
+        if (carryCapacity <= 0) return collected;
+
+        // Work on a copy of available amounts
+        var available = new List<(ResourceEntry entry, double amount)>();
         for (int r = 0; r < resources.Length; r++)
         {
-            collected.Add(new(resources[r], 1));
+            ResourceEntry entry = resources[r];
+            if (entry.CurrentAmount > 0)
+                available.Add((entry, entry.CurrentAmount));
+        }
+
+        if (available.Count == 0) return collected;
+
+        // Sort by abundance ascending (scarce first, abundant last)
+        available.Sort((a, b) => a.amount.CompareTo(b.amount));
+
+        double remaining = carryCapacity;
+
+        for (int a = 0; a < available.Count; a++)
+        {
+            (ResourceEntry entry, double amount) pair = available[a];
+            if (remaining <= 0) break;
+
+            // Proportional target: fraction of remaining based on relative abundance
+            double totalAvailable = 0;
+            foreach (var p in available) totalAvailable += p.amount;
+            double fraction = pair.amount / totalAvailable;
+
+            double target = Math.Min(pair.amount, Math.Ceiling(carryCapacity * fraction));
+
+            // Ensure at least 1 if available
+            if (pair.amount > 0 && target < 1)
+                target = 1;
+
+            // Clamp by remaining capacity
+            target = Math.Min(target, remaining);
+
+            double taken = pair.entry.Decrease(target);
+            if (taken > 0)
+            {
+                collected.Add(new CollectedResource(pair.entry.Type, taken));
+                remaining -= taken;
+            }
+        }
+
+        // If there’s leftover capacity, dump it into the most abundant resource
+        if (remaining > 0 && available.Count > 0)
+        {
+            var last = available[available.Count - 1];
+            double taken = last.entry.Decrease(remaining);
+            if (taken > 0)
+                collected.Add(new CollectedResource(last.entry.Type, taken));
         }
 
         return collected;
     }
+
 }
 
-[System.Serializable]
-public struct ResourceAmount
+/// <summary>
+/// Result of a collect operation: type + amount collected.
+/// </summary>
+public struct CollectedResource
 {
-    public ResourceType type;
-    public int amount;
+    public ResourceType Type;
+    public double Amount;
 
-    public ResourceAmount(ResourceType type, int amount)
+    public CollectedResource(ResourceType type, double amount)
     {
-        this.type = type;
-        this.amount = amount;
-    }
-
-    public override bool Equals(object obj)
-    {
-        return obj is ResourceAmount other &&
-               EqualityComparer<ResourceType>.Default.Equals(type, other.type) &&
-               amount == other.amount;
-    }
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(type, amount);
-    }
-
-    public void Deconstruct(out ResourceType type, out int amount)
-    {
-        type = this.type;
-        amount = this.amount;
-    }
-
-    public static implicit operator (ResourceType type, int amount)(ResourceAmount value)
-    {
-        return (value.type, value.amount);
-    }
-
-    public static implicit operator ResourceAmount((ResourceType type, int amount) value)
-    {
-        return new ResourceAmount(value.type, value.amount);
+        Type = type;
+        Amount = amount;
     }
 }

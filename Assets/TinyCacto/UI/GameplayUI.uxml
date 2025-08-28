@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="ResourcesUI" src="project://database/Assets/TinyCacto/UI/ResourcesUI.uxml?fileID=9197481963319205126&amp;guid=7a244edf5097f1d4e977a1c9639e39ca&amp;type=3#ResourcesUI" />
+    <ui:Instance template="ResourcesUI" name="GroupRoot" style="height: 1081px;" />
+</ui:UXML>

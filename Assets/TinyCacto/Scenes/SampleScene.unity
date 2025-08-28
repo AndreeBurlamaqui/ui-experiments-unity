@@ -1059,7 +1059,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceGroup
   resources:
-  - {fileID: 11400000, guid: d5b363db2e9f1614bb5c514db8add89d, type: 2}
+  - type: {fileID: 0}
+    currentAmount: 0
+    efficacy: 0
 --- !u!4 &693297873
 Transform:
   m_ObjectHideFlags: 0
@@ -1086,8 +1088,9 @@ GameObject:
   m_Component:
   - component: {fileID: 759080683}
   - component: {fileID: 759080682}
+  - component: {fileID: 759080684}
   m_Layer: 5
-  m_Name: UI - Resource Group
+  m_Name: UI - Gameplay UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1107,7 +1110,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.UIElements.UIDocument
   m_PanelSettings: {fileID: 11400000, guid: 2c5d728726ce6814f81e83abbb179ddf, type: 2}
   m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 9197481963319205126, guid: 7a244edf5097f1d4e977a1c9639e39ca, type: 3}
+  sourceAsset: {fileID: 9197481963319205126, guid: 3d0eac80fc9f784458fbf7c9e328290b, type: 3}
   m_SortingOrder: 0
   m_Position: 0
   m_WorldSpaceSizeMode: 1
@@ -1131,6 +1134,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &759080684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759080681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b24c63cb2b56ca5488430b68a6aa0827, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayUIController
+  resourcePrefab: {fileID: 9197481963319205126, guid: 354404ccf230a3343afeff88b5bc71ed, type: 3}
+  upgradePrefab: {fileID: 9197481963319205126, guid: 98a4936a6e49f974ba24058419d637ed, type: 3}
 --- !u!1 &788754580
 GameObject:
   m_ObjectHideFlags: 0
@@ -1499,7 +1516,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 5d114d71e3582c140b916f7d570d8149, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1894,8 +1911,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceGroup
   resources:
-  - {fileID: 11400000, guid: 8ca97dd8f8802a745bee44db24acfa4e, type: 2}
-  - {fileID: 11400000, guid: d5b363db2e9f1614bb5c514db8add89d, type: 2}
+  - type: {fileID: 11400000, guid: d5b363db2e9f1614bb5c514db8add89d, type: 2}
+    currentAmount: 0
+    efficacy: 0.5
+  - type: {fileID: 11400000, guid: 8ca97dd8f8802a745bee44db24acfa4e, type: 2}
+    currentAmount: 0
+    efficacy: 0.15
 --- !u!4 &1843455692
 Transform:
   m_ObjectHideFlags: 0
@@ -1942,7 +1963,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ResourceGroup
   resources:
-  - {fileID: 11400000, guid: 8ca97dd8f8802a745bee44db24acfa4e, type: 2}
+  - type: {fileID: 0}
+    currentAmount: 0
+    efficacy: 0
 --- !u!4 &1986353496
 Transform:
   m_ObjectHideFlags: 0
