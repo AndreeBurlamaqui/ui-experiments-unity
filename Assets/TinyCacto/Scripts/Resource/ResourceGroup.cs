@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ResourceGroup : MonoBehaviour
+public class ResourceGroup : MonoBehaviour, IWorldSpaceSelectable
 {
 
     [SerializeField] private ResourceEntry[] resources;
@@ -18,7 +18,7 @@ public class ResourceGroup : MonoBehaviour
     }
 
     [ContextMenu("On click to collect")]
-    public void OnClick()
+    public void OnSelect()
     {
         // Check if it's already collected
         if (ResourceManager.Instance.IsGroupOwned(this))
@@ -98,7 +98,6 @@ public class ResourceGroup : MonoBehaviour
 
         return collected;
     }
-
 }
 
 /// <summary>
