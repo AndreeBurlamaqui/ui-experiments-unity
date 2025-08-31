@@ -6,23 +6,19 @@ public class ResourceEntry
 {
     [SerializeField] private ResourceType type;
     [SerializeField] private double currentAmount;
-    [SerializeField] private double efficacy; // units per second
+    [SerializeField] private UpgradeInstance extractionSpeed; // units per second
 
     private double _accumulator;
 
     public ResourceType Type => type;
     public double CurrentAmount => currentAmount;
-    public double Efficacy
-    {
-        get => efficacy;
-        set => efficacy = Math.Max(0, value);
-    }
 
     /// <summary>
     /// Update this resource production by deltaTime.
     /// </summary>
     public void Update(float deltaTime)
     {
+        var efficacy = extractionSpeed.GetTotalPower();
         if (efficacy <= 0) return;
 
         _accumulator += efficacy * deltaTime;

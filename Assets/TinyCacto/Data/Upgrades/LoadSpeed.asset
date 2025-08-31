@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46fc05ef3e4ea4a44b45669c86ee9f41, type: 3}
-  m_Name: QuickerExtraction
+  m_Name: LoadSpeed
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  <Title>k__BackingField: Quicker Worker
-  BaseCost: 50
-  CostMultiplier: 1.15
-  BasePower: 5
-  PowerMultiplier: 0.95
+  <Title>k__BackingField: Load Speed
+  <Description>k__BackingField: How quickly the boat is filled by the collected resources
+  BaseCost: 80
+  CostMultiplier: 1.8
+  BasePower: 1
+  PowerMultiplier: 1.05

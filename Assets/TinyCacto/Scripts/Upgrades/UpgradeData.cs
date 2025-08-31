@@ -4,6 +4,7 @@ using UnityEngine;
 public class UpgradeData : ScriptableObject
 {
     [field: SerializeField, Tooltip("Name of the upgrade")] public string Title { get; private set; }
+    [field: SerializeField, TextArea(2, 5), Tooltip("Description of the upgrade. Most for explanation")] public string Description { get; private set; }
 
     // Cost is related to how much gold the player will need to invest
     [SerializeField, Tooltip("Cost at level 1 (in gold)")] private float BaseCost;

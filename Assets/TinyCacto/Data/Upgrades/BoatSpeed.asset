@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46fc05ef3e4ea4a44b45669c86ee9f41, type: 3}
-  m_Name: BoatAmount
+  m_Name: BoatSpeed
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  <Title>k__BackingField: Extra Boat
-  <Description>k__BackingField: How many boats are assigned to an island
-  BaseCost: 200
-  CostMultiplier: 1.5
-  BasePower: 1
-  PowerMultiplier: 1
+  <Title>k__BackingField: Boat Speed
+  <Description>k__BackingField: How quickly the boat moves
+  BaseCost: 100
+  CostMultiplier: 1.2
+  BasePower: 5
+  PowerMultiplier: 1.1

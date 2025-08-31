@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46fc05ef3e4ea4a44b45669c86ee9f41, type: 3}
-  m_Name: QuickerWorker
+  m_Name: BoatCapacity
   m_EditorClassIdentifier: Assembly-CSharp::UpgradeData
-  <Title>k__BackingField: Quicker Worker
-  BaseCost: 80
-  CostMultiplier: 1.8
-  BasePower: 1
-  PowerMultiplier: 1.05
+  <Title>k__BackingField: Boat Capacity
+  <Description>k__BackingField: How much resources the boat can carry each travel
+  BaseCost: 100
+  CostMultiplier: 1.2
+  BasePower: 10
+  PowerMultiplier: 1.1

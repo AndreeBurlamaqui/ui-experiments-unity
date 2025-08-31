@@ -1,13 +1,11 @@
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 [System.Serializable]
 public class UpgradeInstance
 {
-    public UpgradeData Data { get; private set; }
-    public int CurrentLevel { get; private set; } = 0;
-
-    public float Multiplier { get; set; } = 1f;
+    [field: SerializeField] public UpgradeData Data { get; private set; }
+    [field: SerializeField] public int CurrentLevel { get; private set; } = 1;
+    [field: SerializeField] public float Multiplier { get; set; } = 1f;
 
     public UpgradeInstance(UpgradeData data)
     {

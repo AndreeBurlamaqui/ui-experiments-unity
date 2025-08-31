@@ -228,7 +228,10 @@ MonoBehaviour:
   resources:
   - type: {fileID: 11400000, guid: d5b363db2e9f1614bb5c514db8add89d, type: 2}
     currentAmount: 0
-    efficacy: 0
+    extractionSpeed:
+      <Data>k__BackingField: {fileID: 11400000, guid: 99b6b00525125f64487a13d94e6eef6a, type: 2}
+      <CurrentLevel>k__BackingField: 1
+      <Multiplier>k__BackingField: 0.75
 --- !u!135 &7531650956415661142
 SphereCollider:
   m_ObjectHideFlags: 0

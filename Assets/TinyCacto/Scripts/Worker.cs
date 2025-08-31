@@ -16,29 +16,16 @@ public class Worker : MonoBehaviour
 
     [SerializeField] private List<CollectedResource> backpack = new();
 
-    [field: SerializeField] public WorkerData Data { get; private set; }
-    [System.Serializable]
-    public class WorkerData
+    [Header("STATS")]
+    [SerializeField] private UpgradeInstance moveSpeed;
+    [SerializeField] private UpgradeInstance boatCapacity;
+    [SerializeField] private UpgradeInstance loadSpeed;
+
+    private ResourceGroup attachedIsland;
+
+    public void Initiate(ResourceGroup _attachedIsland)
     {
-        public ResourceGroup resourceData;
-
-        [Header("STATS")]
-        [Tooltip("How long worker takes to reach destination. In seconds")] public float speed;
-        [Tooltip("How much worker can carry. In units")] public float capacity;
-        [Tooltip("How quickly it can collect. In seconds")] public float efficacy;
-
-        public WorkerData(ResourceGroup group, float speed, float capacity, float efficacy)
-        {
-            resourceData = group;
-            this.speed = speed;
-            this.capacity = capacity;
-            this.efficacy = efficacy;
-        }
-    }
-
-    public void Initiate(WorkerData data)
-    {
-        Data = data;
+        attachedIsland = _attachedIsland;
         transform.position = ResourceManager.Instance.transform.position;
         SetState(CollectingState.COLLECTING);
     }
@@ -83,7 +70,8 @@ public class Worker : MonoBehaviour
     private async void OnDelivering()
     {
         // How quickly should it go to nexus and then empty backpack
-        var movement = LMotion.Create(transform.position, ResourceManager.Instance.transform.position, Data.speed)
+        var speed = moveSpeed.GetTotalPower();
+        var movement = LMotion.Create(transform.position, ResourceManager.Instance.transform.position, speed)
             .BindToPosition(transform);
         await movement;
 
@@ -94,21 +82,24 @@ public class Worker : MonoBehaviour
 
     private async void OnCollecting()
     {
-        Debug.Log($"Worker started movement to collect. Will take {Data.speed} seconds");
+        var speed = moveSpeed.GetTotalPower();
+        Debug.Log($"Worker started movement to collect. Will take {speed} seconds");
         float angle = Random.Range(0f, Mathf.PI * 2f);
         Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * 2;
-        var collectPos = Data.resourceData.transform.position + offset;
-        var movement = LMotion.Create(transform.position, collectPos, Data.speed)
+        var collectPos = attachedIsland.transform.position + offset;
+        var movement = LMotion.Create(transform.position, collectPos, speed)
             .BindToPosition(transform);
         await movement;
 
-        Debug.Log($"Worker started collecting. Will take {Data.efficacy} seconds");
-        var collect = LMotion.Create(0, 1, Data.efficacy)
+        var efficacy = loadSpeed.GetTotalPower();
+        Debug.Log($"Worker started collecting. Will take {efficacy} seconds");
+        var collect = LMotion.Create(0, 1, efficacy)
             .RunWithoutBinding();
         await collect;
 
         // Based on efficacy, collect resource from group
-        var collected = Data.resourceData.Collect(Data.capacity);
+        var capacity = boatCapacity.GetTotalPower();
+        var collected = attachedIsland.Collect(capacity);
         backpack.AddRange(collected);
         SetState(CollectingState.DELIVERING);
     }
