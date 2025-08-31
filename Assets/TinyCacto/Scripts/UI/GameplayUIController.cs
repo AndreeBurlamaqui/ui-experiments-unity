@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -21,8 +22,8 @@ public class GameplayUIController : MonoBehaviour
     {
         // Build all templates so we can fill them later
         root = GetComponent<UIDocument>().rootVisualElement;
-        groupRoot = root.Query<VisualElement>("GroupRoot");
-        resourceRoot = root.Query<VisualElement>("ResourcesRoot");
+        groupRoot = root.Q<VisualElement>("GroupRoot");
+        resourceRoot = root.Q<VisualElement>("ResourcesRoot");
         int curDatas = resourceRoot.childCount;
         resourceInstances = new VisualElement[curDatas]; // By design this is the only amount we'll allow
         for(int d = 0; d < curDatas; d++)
@@ -30,18 +31,23 @@ public class GameplayUIController : MonoBehaviour
             resourceInstances[d] = resourceRoot.ElementAt(d);
         }
 
-        upgradeRoot = root.Query<VisualElement>("UpgradeRoot");
+        upgradeRoot = root.Q<VisualElement>("UpgradeRoot");
+
+        var closeButton = root.Q<Button>("ResourcesCloseButton");
+        closeButton.clicked += OnCloseResourceUI;
 
         SwitchResourceUIState(false);
     }
 
     public void SwitchResourceUIState(bool newState)
     {
+        Debug.Log("Switching resource ui state to " + newState);
         // TODO: Based on current state, animate it or not
         groupRoot.SetEnabled(newState);
         if (newState)
         {
             groupRoot.style.display = DisplayStyle.Flex;
+            //groupRoot.Focus();
         }
         else
         {
@@ -70,5 +76,10 @@ public class GameplayUIController : MonoBehaviour
             resourceUI.dataSource = resourcesDatas[i];
             Debug.Log("Updating resource ui " + resourceUI.name);
         }
+    }
+
+    private void OnCloseResourceUI()
+    {
+        SwitchResourceUIState(false);
     }
 }

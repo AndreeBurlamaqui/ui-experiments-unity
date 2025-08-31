@@ -21,7 +21,6 @@ public class WorldSpaceSelector : MonoBehaviour
             return;
         }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         if (mainCamera == null)
             mainCamera = Camera.main;
@@ -31,7 +30,9 @@ public class WorldSpaceSelector : MonoBehaviour
     private void Update()
     {
         if (IsPointerOverUI())
+        {
             return;
+        }
 
         // Mouse click
         if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)

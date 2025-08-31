@@ -1,19 +1,21 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <ui:Template name="ResourceData" src="project://database/Assets/TinyCacto/UI/ResourceData.uxml?fileID=9197481963319205126&amp;guid=354404ccf230a3343afeff88b5bc71ed&amp;type=3#ResourceData" />
     <ui:Template name="UpgradeData" src="project://database/Assets/TinyCacto/UI/UpgradeData.uxml?fileID=9197481963319205126&amp;guid=98a4936a6e49f974ba24058419d637ed&amp;type=3#UpgradeData" />
-    <ui:VisualElement name="Root" style="flex-grow: 1; width: 800px; height: 25%; max-height: 75%; justify-content: center; align-items: center; align-self: auto; align-content: auto; bottom: auto; left: auto; top: 15%;">
-        <ui:VisualElement name="GroupNameBG" style="flex-grow: 1; opacity: 1; background-color: rgb(214, 214, 214); height: 5%; flex-basis: 0%; display: flex; visibility: visible; width: 55%; min-height: 5%; max-height: 5%; flex-direction: column; flex-wrap: nowrap; align-items: center; justify-content: center; align-self: center; top: 5px;">
-            <ui:Label text="Island #1&#10;" name="GroupNameLabel" style="width: 100%; height: 100%; -unity-text-align: middle-center;" />
+    <ui:Button name="ResourcesCloseButton" style="width: 100%; height: 100%; opacity: 1; background-color: rgba(0, 0, 0, 0.78); margin-top: 0; margin-left: 0; margin-bottom: 0; margin-right: 0;">
+        <ui:VisualElement name="Root" style="flex-grow: 0; width: 800px; height: 75%; justify-content: center; align-items: center; align-self: auto; align-content: auto; bottom: auto; left: auto; top: 15%; flex-shrink: 0;">
+            <ui:VisualElement name="GroupNameBG" style="flex-grow: 1; opacity: 1; background-color: rgb(214, 214, 214); height: 5%; flex-basis: 0%; display: flex; visibility: visible; width: 55%; min-height: 5%; max-height: 5%; flex-direction: column; flex-wrap: nowrap; align-items: center; justify-content: center; align-self: center; top: 5px;">
+                <ui:Label text="Island #1&#10;" name="GroupNameLabel" style="width: 100%; height: 100%; -unity-text-align: middle-center;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="ResourcesRoot" style="flex-grow: 1; opacity: 1; background-color: rgba(214, 214, 214, 0.78); height: 25%; flex-basis: 0%; display: flex; visibility: visible; width: 75%; min-height: 25%; max-height: 25%; flex-direction: row; flex-wrap: nowrap; align-items: stretch; justify-content: center; align-self: center; align-content: flex-start; padding-top: 10px; padding-bottom: 5px;">
+                <ui:Instance template="ResourceData" name="ResourceData1" />
+                <ui:Instance template="ResourceData" name="ResourceData2" />
+                <ui:Instance template="ResourceData" name="ResourceData3" />
+            </ui:VisualElement>
+            <ui:VisualElement name="UpgradeRoot" style="height: 100%; background-color: rgba(214, 214, 214, 0.78); margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; justify-content: center; align-items: auto; align-self: auto; align-content: auto;">
+                <ui:Instance template="UpgradeData" name="UpgradeData" />
+                <ui:Instance template="UpgradeData" name="UpgradeData" />
+                <ui:Instance template="UpgradeData" name="UpgradeData" />
+            </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="ResourcesRoot" style="flex-grow: 1; opacity: 1; background-color: rgba(214, 214, 214, 0.78); height: 25%; flex-basis: 0%; display: flex; visibility: visible; width: 75%; min-height: 25%; max-height: 25%; flex-direction: row; flex-wrap: nowrap; align-items: stretch; justify-content: center; align-self: center; align-content: flex-start; padding-top: 10px; padding-bottom: 5px;">
-            <ui:Instance template="ResourceData" name="ResourceData1" />
-            <ui:Instance template="ResourceData" name="ResourceData2" />
-            <ui:Instance template="ResourceData" name="ResourceData3" />
-        </ui:VisualElement>
-        <ui:VisualElement name="UpgradeRoot" style="height: 100%; background-color: rgba(214, 214, 214, 0.78); margin-top: 20px; margin-right: 20px; margin-bottom: 20px; margin-left: 20px; justify-content: space-between; align-items: stretch;">
-            <ui:Instance template="UpgradeData" name="UpgradeData" />
-            <ui:Instance template="UpgradeData" name="UpgradeData" />
-            <ui:Instance template="UpgradeData" name="UpgradeData" />
-        </ui:VisualElement>
-    </ui:VisualElement>
+    </ui:Button>
 </ui:UXML>
