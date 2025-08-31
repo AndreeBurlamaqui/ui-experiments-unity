@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "ResourceType", menuName = "Scriptable Objects/ResourceType")]
+[CreateAssetMenu(fileName = "ResourceType", menuName = "Tiny Cacto/Resource Type")]
 public class ResourceType : ScriptableObject
 {
     [field: SerializeField] public string Title { get; private set; }
