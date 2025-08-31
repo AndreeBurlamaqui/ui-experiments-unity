@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class UpgradeManager : MonoBehaviour
 {
@@ -18,13 +20,19 @@ public class UpgradeManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
-        for(int m = 0; m < multipliers.Length; m++)
+        // Load every upgrades by addressables label
+        var loader = Addressables.LoadAssetsAsync<UpgradeData>("upgrades");
+        yield return loader;
+
+        var upgradesLoadedCount = loader.Result.Count;
+        multipliers = new GlobalMultiplier[upgradesLoadedCount];
+        for(int m = 0; m < upgradesLoadedCount; m++)
         {
-            var globalData = multipliers[m];
-            globalData.Initiate();
-            cachedMultipliers.Add(globalData.Data, globalData);
+            var globalData = loader.Result[m];
+            multipliers[m] = new GlobalMultiplier(globalData);
+            cachedMultipliers.Add(globalData, multipliers[m]);
         }
     }
 
@@ -65,8 +73,9 @@ public class UpgradeManager : MonoBehaviour
         public UpgradeData Data;
         public UpgradeInstance Multiplier;
 
-        public void Initiate()
+        public GlobalMultiplier(UpgradeData data)
         {
+            Data = data;
             Multiplier = new UpgradeInstance(Data);
 
             // TODO: Get current global value from save file

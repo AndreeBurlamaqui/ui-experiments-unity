@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Data
+  m_GUID: 0f8aee54635ee5b428be72f9af130a24
+  m_SerializeEntries:
+  - m_GUID: 70c4124ea51261548b0dd6ab908eee5b
+    m_Address: Assets/TinyCacto/Data/Upgrades/BoatCapacity.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - upgrades
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7b1d1a6e40d11e249878a2d5e2af1d9b
+    m_Address: Assets/TinyCacto/Data/Upgrades/BoatSpeed.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - upgrades
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 99b6b00525125f64487a13d94e6eef6a
+    m_Address: Assets/TinyCacto/Data/Upgrades/ExtractionSpeed.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - upgrades
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d40f06a5f0250cf4cadb2de996cbe15e
+    m_Address: Assets/TinyCacto/Data/Upgrades/BoatAmount.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - upgrades
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e1603911f13ece14d8ae5345e972f715
+    m_Address: Assets/TinyCacto/Data/Upgrades/LoadSpeed.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - upgrades
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f1c4a2f6a132d4a4da4b314d13d6ed57, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: d925f7a9fad4287409ad048845afceef, type: 2}
+    - {fileID: 11400000, guid: 772e6a3f5217b8a48abb215621203310, type: 2}
