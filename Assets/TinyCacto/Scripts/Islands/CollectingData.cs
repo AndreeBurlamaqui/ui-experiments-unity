@@ -12,7 +12,7 @@ public class CollectingData
 
         // Create first worker
         var firstWorker = Object.Instantiate(workerPrefab, ResourceManager.Instance.transform.position, Quaternion.identity);
-        firstWorker.Initiate(new Worker.WorkerData(CollectingOn, 5, 5, 5));
+        firstWorker.Initiate(group);
         everyWorker.Add(firstWorker);
     }
 
@@ -20,9 +20,33 @@ public class CollectingData
     {
         CollectingOn.Tick();
 
-        for(int w = 0; w < everyWorker.Count; w++)
+        for (int w = 0; w < everyWorker.Count; w++)
         {
             everyWorker[w].Tick();
         }
     }
+
+    #region UPGRADES
+
+    public void UpgradeExtractionSpeed()
+    {
+
+    }
+
+    public void UpgradeWorkerCount()
+    {
+
+    }
+
+    public void UpgradeWorkerFillSpeed()
+    {
+
+    }
+
+    public void UpgradeWorkerCapacity()
+    {
+
+    }
+
+    #endregion
 }
